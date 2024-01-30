@@ -1,0 +1,1316 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API Mangue Space Coworking - Módulo de Endereço Fiscail",
+        "description": "<strong>A API(Application Programing Interface) de Endereço Fiscal</strong> é um <strong>módulo do Sistema de Gerenciamento do Coworking Mangue Space</strong>, esse módulo será responsável por: <ul><li>Cadastramento e gerenciamento das empresas contratantes do serviço da Softex;</li><li>Organizar em um sistema a listagem das empresas com cadastro ativo aptos para recebimento de encomendas e correspondências;</li><li>Notificar os Representantes das empresas cadastradas após o recebimento de encomendas e correpondências.</li></ul>",
+        "termsOfService": "http://softex.com.br",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000",
+            "description": "API de teste"
+        }
+    ],
+    "paths": {
+        "/usuario/autenticacao": {
+            "post": {
+                "tags": ["Usuario"],
+                "summary": "Autênticação de Usuário",
+                "description": "Deverá ser possível que um <strong>usuário</strong> possa se autênticar no sistema.",
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                "email": "admin@email.com",
+                                "senha": "admin"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/AutenticacaoUsuario"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "E-mail ou senha incorretos!"
+                    }
+                }
+            }
+        },
+        "/usuario/admin": {
+            "post": {
+                "tags": ["Usuario"],
+                "summary": "Cadastramento de Usuário Administrador",
+                "description": "Deverá ser possível que um <strong>usuário administrador</strong> possa cadastrar outros usuários administradores.",
+                "security": [{ "bearerAuth": [] }],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                "nomeUsuario": "Calos Admin",
+                                "funcaoUsuario": "Desenvolvedor Back-End",
+                                "emailUsuario": "calos.admin@email.com",
+                                "loginUsuario": "calosadmin",
+                                "senhaUsuario": "pass123"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Usuário Administrador cadastrado!"
+                    },
+                    "400": {
+                        "description": "Usuário já existente!"
+                    },
+                    "401": {
+                        "description": "Não Autorizado!"
+                    }
+                }
+            }
+        },
+        "/usuario/recepcao": {
+            "post": {
+                "tags": ["Usuario"],
+                "summary": "Cadastramento de Usuário da Recepção",
+                "description": "Deverá ser possível que um <strong>usuário administrador</strong> possa cadastrar outros usuários da recepção para recebimento de encomendas.",
+                "security": [{ "bearerAuth": [] }],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                "nomeUsuario": "João da Silva",
+                                "funcaoUsuario": "Segurança",
+                                "emailUsuario": "joao.silva@email.com",
+                                "loginUsuario": "joaosilva",
+                                "senhaUsuario": "pass123"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Usuário Recepção cadastrado!"
+                    },
+                    "400": {
+                        "description": "Usuário já existente!"
+                    },
+                    "401": {
+                        "description": "Não Autorizado!"
+                    }
+                }
+            }
+        },
+        "/usuario/ativos": {
+            "get": {
+                "tags": ["Usuario"],
+                "summary": "Listagem de Usuários Ativos",
+                "description": "Deverá ser possível que um <strong>usuário administrador</strong> possa listar todos os usuários que estão cadastrados e ativos, na base de dados do sistema.",
+                "security": [{ "bearerAuth": [] }],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Usuario"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Não Autorizado!"
+                    }
+                }
+            }
+        },
+        "/usuario/inativos": {
+            "get": {
+                "tags": ["Usuario"],
+                "summary": "Listagem de Usuários Ativos",
+                "description": "Deverá ser possível que um <strong>usuário administrador</strong> possa listar todos os usuários que estão cadastrados e inativos, na base de dados do sistema.",
+                "security": [{ "bearerAuth": [] }],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Usuario"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Não Autorizado!"
+                    }
+                }
+            }
+        },
+        "/usuario/email/{email}": {
+            "get": {
+                "tags": ["Usuario"],
+                "summary": "Busca de Usuário por Email",
+                "description": "Deverá ser possível que um <strong>usuário administrador</strong> possa buscar um usuário que está cadastrado, na base de dados do sistema.",
+                "security": [{ "bearerAuth": [] }],
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "path",
+                        "description": "Email do Usuário para busca",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Usuario"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Usuário não encontrado"
+                    },
+                    "401": {
+                        "description": "Não Autorizado!"
+                    }
+                }
+            }
+        },
+        "/usuario/ativar/{id}": {
+            "patch": {
+                "tags": ["Usuario"],
+                "summary": "Ativação do Usuário",
+                "description": "Deverá ser possível que um <strong>usuário administrador</strong> possa ativar um usuário.",
+                "security": [{ "bearerAuth": [] }],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id do Usuário para ativação",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Usuário ativado!"
+                    },
+                    "400": {
+                        "description": "Usuário não encontrado! || Usuário já está ativo!"
+                    },
+                    "401": {
+                        "description": "Não Autorizado!"
+                    }
+                }
+            }
+        },
+        "/usuario/inativar/{id}": {
+            "patch": {
+                "tags": ["Usuario"],
+                "summary": "Inativação do Usuário",
+                "description": "Deverá ser possível que um <strong>usuário administrador</strong> possa inativar um usuário.",
+                "security": [{ "bearerAuth": [] }],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id do Usuário para inativação",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Usuário inativado!"
+                    },
+                    "400": {
+                        "description": "Usuário não encontrado! || Usuário já está Inativo!"
+                    },
+                    "401": {
+                        "description": "Não Autorizado!"
+                    }
+                }
+            }
+        },
+        "/usuario/{id}": {
+            "put": {
+                "tags": ["Usuario"],
+                "summary": "Atualizar dados do Usuário",
+                "description": "Deverá ser possível que um <strong>usuário</strong> possa modificar/atualizar seus dados.",
+                "security": [{ "bearerAuth": [] }],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id do Usuário para busca",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                "nomeUsuario": "Charlie Brownn",
+                                "senhaUsuario": "passworddeff"
+                            }        
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "400": {
+                        "description": "Usuário não encontrado!"
+                    },
+                    "401": {
+                        "description": "Não Autorizado!"
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Usuario"],
+                "summary": "Deletar Usuário por ID",
+                "description": "everá ser possível que um <strong>usuário administrador</strong> possa deletar um usuário com base no ID fornecido.",
+                "security": [{ "bearerAuth": [] }],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do Usuário para Apagar",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Usuário não encontrado!"
+                    },
+                    "401": {
+                        "description": "Não Autorizado!"
+                    }
+                }
+            }       
+        },
+        "/cadastroCliente/pessoaFisica": {
+            "post": {
+                "tags": ["Cliente"],
+                "summary": "Cadastramento de Cliente PF",
+                "description": "Deverá ser possível que um <strong>usuário administrador</strong> possa cadastrar um cliente Pessoa Física na base de dados do sistema.",
+                "security": [{ "bearerAuth": [] }],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                "nomeCliente": "João Pedro",
+                                "cpf": "00011122244",
+                                "telefoneCliente": "4444-8888", 
+                                "emailCliente": "contato@lojaspedros.com", 
+                                "qtdPontosCliente": 2, 
+                                "prazoCliente": "2024-01-14", 
+                                "valorMensalCliente": "400",
+                                "logradouro": "Rua João Pedro", 
+                                "numero": 255, 
+                                "bairro": "Bairro do Recife", 
+                                "uf": "PE",
+                                "numEndFiscal": 70,
+                                "idUsuario": 1
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cliente cadastrado com sucesso!"
+                    },
+                    "400": {
+                        "description": "Requisição Inválida!"
+                    },
+                    "401": {
+                        "description": "Não Autorizado!"
+                    }
+                }
+            }
+        },
+        "/cadastroCliente/pessoaJuridica": {
+            "post": {
+                "tags": ["Cliente"],
+                "summary": "Cadastramento de Cliente PJ",
+                "description": "Deverá ser possível que um <strong>usuário administrador</strong> possa cadastrar um cliente Pessoa Jurídica na base de dados do sistema.",
+                "security": [{ "bearerAuth": [] }],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                "nomeCliente": "Walter Wagner",
+                                "razaoSocial": "Walter LTDA",
+                                "cnpj": "05311244000177",
+                                "telefoneCliente": "2222-3333", 
+                                "emailCliente": "walter.limitada@email.com", 
+                                "qtdPontosCliente": 2, 
+                                "prazoCliente": "2024-01-13", 
+                                "valorMensalCliente": "400",
+                                "logradouro": "rua do frevo", 
+                                "numero": 500, 
+                                "bairro": "Bairro do Recife", 
+                                "uf": "PE",
+                                "numEndFiscal": 42,
+                                "idUsuario": 1,
+                                "nomeRepresent": "Richele Praxedes",
+                                "emailRepreset": "richele@gmail.com",
+                                "telefoneRepresent": "5555-4444"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cliente cadastrado com sucesso!"
+                    },
+                    "400": {
+                        "description": "Requisição Inválida!"
+                    },
+                    "401": {
+                        "description": "Não Autorizado!"
+                    }
+                }
+            }
+        },
+        "/cliente/ativados": {
+            "get": {
+                "tags": ["Cliente"],
+                "summary": "Listagem de Clientes Ativos",
+                "description": "Deverá ser possível que um <strong>usuário</strong> possa listar todos os Clientes que estão cadastrados e ativos na base de dados do sistema.",
+                "security": [{ "bearerAuth": [] }],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "401": {
+                        "description": "Não Autorizado!"
+                    }
+                }
+            }
+        },
+        "/cliente/inativados": {
+            "get": {
+                "tags": ["Cliente"],
+                "summary": "Listagem de Clientes Inativos",
+                "description": "Deverá ser possível que um <strong>usuário administrador</strong> possa listar todos os Clientes que estão cadastrados e inativos, na base de dados do sistema.",
+                "security": [{ "bearerAuth": [] }],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "401": {
+                        "description": "Não Autorizado!"
+                    }
+                }
+            }
+        },
+        "/cadastroCliente/cnpj/{cnpj}": {
+            "get": {
+                "tags": ["Cliente"],
+                "summary": "Busca de Cliente por CNPJ",
+                "description": "Deverá ser possível que um <strong>usuário</strong> possa buscar um Cliente pelo número de CNPJ na base de dados do sistema.",
+                "security": [{ "bearerAuth": [] }],
+                "parameters": [
+                    {
+                        "name": "cnpj",
+                        "in": "path",
+                        "description": "CNPJ do Cliente para busca",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cliente"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Não existe um Cliente com este CNPJ"
+                    },
+                    "401": {
+                        "description": "Não Autorizado!"
+                    }
+                }
+            }
+        },
+        "/cadastroCliente/cpf/{cpf}": {
+            "get": {
+                "tags": ["Cliente"],
+                "summary": "Busca de Cliente por CPF",
+                "description": "Deverá ser possível que um <strong>usuário</strong> possa buscar um Cliente pelo número de CPF na base de dados do sistema.",
+                "security": [{ "bearerAuth": [] }],
+                "parameters": [
+                    {
+                        "name": "cpf",
+                        "in": "path",
+                        "description": "CPF do Cliente para busca",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cliente"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Não existe um Cliente com este CPF"
+                    },
+                    "401": {
+                        "description": "Não Autorizado!"
+                    }
+                }
+            }
+        },
+        "/cliente/id/{id}": {
+            "get": {
+                "tags": ["Cliente"],
+                "summary": "Busca de Cliente por ID",
+                "description": "Deverá ser possível que um <strong>usuário</strong> possa buscar um Cliente pelo número do ID na base de dados do sistema.",
+                "security": [{ "bearerAuth": [] }],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do Cliente para busca",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Cliente"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Cliente não encontrado!"
+                    },
+                    "401": {
+                        "description": "Não Autorizado!"
+                    }
+                }
+            }
+        },
+        "/cadastroCliente/ativar/{id}": {
+            "patch": {
+                "tags": ["Cliente"],
+                "summary": "Ativação do Cliente",
+                "description": "Deverá ser possível que um <strong>usuário administrador</strong> possa ativar um Cliente que foi inativado. Observações: Quando a ativação do Cliente for efetuada com sucesso, o endereço postal, e os representantes do mesmo, caso seja uma PJ, deverão ser ativados.",
+                "security": [{ "bearerAuth": [] }],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id do Cliente para ativação",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Cadastro de Cliente ativado!"
+                    },
+                    "400": {
+                        "description": "Cliente não encontrado! || Cliente já se encontra ativo no sistema!"
+                    },
+                    "401": {
+                        "description": "Não Autorizado!"
+                    }
+                }
+            }
+        },
+        "/cadastroCliente/inativar/{id}": {
+            "patch": {
+                "tags": ["Cliente"],
+                "summary": "Inativação do Cliente",
+                "description": "Deverá ser possível que um <strong>usuário administrador</strong> possa inativar um Cliente, isso acontece quando o usuário administrador o faz ou quando acaba o prazo de contrato. A inativação do cliente é um artifício utilizado para impedir que um cliente já cadastrado seja excluído por completo da base de dados, pois ele pode ser ativado novamente a qualquer momento. Observações: Quando a inativação do Cliente for efetuada com sucesso, o endereço postal, e os representantes do mesmo, caso seja uma PJ, deverão ser inativados.",
+                "security": [{ "bearerAuth": [] }],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id do Cliente para inativação",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Cadastro de Cliente inativado!"
+                    },
+                    "400": {
+                        "description": "Cliente não encontrado! || Cliente já se encontra inativo no sistema!"
+                    },
+                    "401": {
+                        "description": "Não Autorizado!"
+                    }
+                }
+            }
+        },
+        "/cadastroCliente/{id}": {
+            "patch": {
+                "tags": ["Cliente"],
+                "summary": "Atualizar dados do Cliente",
+                "description": "Deverá ser possível que um <strong>usuário administrador</strong> possa modificar/atualizar dados de um Cliente da base de dados do sistema.",
+                "security": [{ "bearerAuth": [] }],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id do Usuário para busca",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                "telefoneCliente": "0000-0000",
+                                "emailCliente": "atualizado@email.com",
+                                "qtdPontosCliente": 1,
+                                "prazoCliente": "2024-01-14",
+                                "valorMensalCliente": 750,
+                                "logradouro": "Rua modificada",
+                                "numero": 211,
+                                "bairro": "Bairro modificado",
+                                "uf": "RJ"
+                            }        
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Cadastro de Cliente atualizado!"
+                    },
+                    "400": {
+                        "description": "Cliente não encontrado!"
+                    },
+                    "401": {
+                        "description": "Não Autorizado!"
+                    }
+                }
+            }
+        },
+        "/enderecofiscal/ativos": {
+            "get": {
+                "tags": ["Endereço Fiscal"],
+                "summary": "Listagem de Endereços Fiscais Ativos",
+                "description": "Deverá ser possível que um <strong>usuário</strong> possa listar todos os Endereços Fiscais que estão cadastrados e ativos na base de dados do sistema.",
+                "security": [{ "bearerAuth": [] }],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "401": {
+                        "description": "Não Autorizado!"
+                    }
+                }
+            }
+        },
+        "/enderecofiscal/inativos": {
+            "get": {
+                "tags": ["Endereço Fiscal"],
+                "summary": "Listagem de Endereços Fiscais Inativos",
+                "description": "Deverá ser possível que um <strong>usuário administrador</strong> possa listar todos os Endereços Fiscais que estão cadastrados e inativos na base de dados do sistema.",
+                "security": [{ "bearerAuth": [] }],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "401": {
+                        "description": "Não Autorizado!"
+                    }
+                }
+            }
+        },
+        "/enderecofiscal/{numEndFiscal}": {
+            "get": {
+                "tags": ["Endereço Fiscal"],
+                "summary": "Busca de Endereços Fiscais",
+                "description": "Deverá ser possível que um <strong>usuário</strong> possa buscar um Endereços Fiscais que está cadastrado na base de dados do sistema.",
+                "security": [{ "bearerAuth": [] }],
+                "parameters": [
+                    {
+                        "name": "numEndFiscal",
+                        "in": "path",
+                        "description": "Número de Endereço Fiscal para busca",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/EnderecoFiscal"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Endereço Fiscal não encontrado!"
+                    },
+                    "401": {
+                        "description": "Não Autorizado!"
+                    }
+                }
+            }
+        },
+        "/representante": {
+            "post": {
+                "tags": ["Representante"],
+                "summary": "Cadastramento de Representante",
+                "description": "Deverá ser possível um <strong>usuário administrador</strong> fazer o cadastramento de representantes da empresa na base de dados do sistema.",
+                "security": [{ "bearerAuth": [] }],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                "nomeRepresent": "Carlos Pena",
+                                "emailRepresent": "carlos.pena@HOTMAIL.com",
+                                "telefoneRepresent": "1981-1711",
+                                "idPJuridica": 3
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Representante Cadastrado!"
+                    },
+                    "400": {
+                        "description": "Representante já cadastrado com este E-mail!"
+                    },
+                    "401": {
+                        "description": "Não Autorizado!"
+                    }
+                }
+            }
+        },
+        "/representante/ativos": {
+            "get": {
+                "tags": ["Representante"],
+                "summary": "Listagem de Representantes Ativos",
+                "description": "Deverá ser possível que um <strong>usuário</strong> possa listar todos os Representantes que estão cadastrados e ativos, na base de dados do sistema.",
+                "security": [{ "bearerAuth": [] }],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "401": {
+                        "description": "Não Autorizado!"
+                    }
+                }
+            }
+        },
+        "/representante/inativos": {
+            "get": {
+                "tags": ["Representante"],
+                "summary": "Listagem de Representantes Inativos",
+                "description": "Deverá ser possível que um <strong>usuário</strong> administrador possa listar todos os Representantes que estão cadastrados e inativos, na base de dados do sistema.",
+                "security": [{ "bearerAuth": [] }],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "401": {
+                        "description": "Não Autorizado!"
+                    }
+                }
+            }
+        },
+        "/representante/email/{email}": {
+            "get": {
+                "tags": ["Representante"],
+                "summary": "Busca de Representante por E-mail",
+                "description": "Deverá ser possível que um <strong>usuário</strong> possa buscar um Representante pelo número do E-mail na base de dados do sistema.",
+                "security": [{ "bearerAuth": [] }],
+                "parameters": [
+                    {
+                        "name": "email",
+                        "in": "path",
+                        "description": "E-mail do Representante para busca",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Representante"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Representante não encontrado!"
+                    },
+                    "401": {
+                        "description": "Não Autorizado!"
+                    }
+                }
+            }
+        },
+        "/Representante/ativar/{id}": {
+            "patch": {
+                "tags": ["Representante"],
+                "summary": "Ativação do Representante",
+                "description": "Deverá ser possível que um <strong>usuário administrador</strong> possa ativar um Representante que foi inativado.",
+                "security": [{ "bearerAuth": [] }],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id do Representante para ativação",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Representante ativado!"
+                    },
+                    "400": {
+                        "description": "Representante não encontrado! || Representante já está ativo!"
+                    },
+                    "401": {
+                        "description": "Não Autorizado!"
+                    }
+                }
+            }
+        },
+        "/Representante/inativar/{id}": {
+            "patch": {
+                "tags": ["Representante"],
+                "summary": "Inativação do Representante",
+                "description": "Deverá ser possível que um <strong>usuário administrador</strong> possa inativar um Representante. A inativação do representante é um artifício utilizado para impedir que um Representante já cadastrado seja excluído por completo da base de dados, pois ele pode ser ativado novamente a qualquer momento.",
+                "security": [{ "bearerAuth": [] }],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id do Representante para inativação",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Representante inativado!"
+                    },
+                    "400": {
+                        "description": "Representante não encontrado! || Representante já está Inativo!"
+                    },
+                    "401": {
+                        "description": "Não Autorizado!"
+                    }
+                }
+            }
+        },
+        "/representante/{id}": {
+            "patch": {
+                "tags": ["Representante"],
+                "summary": "Atualizar dados do Representante",
+                "description": "Deverá ser possível que um <strong>usuário administrador</strong> possa modificar/atualizar dados de um Representante da base de dados do sistema.",
+                "security": [{ "bearerAuth": [] }],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id do Representante para busca",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                "emailRepresent": "atualizado@email.com",
+                                "telefoneRepresent": "0000-0000"
+                            }        
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Representante atualizado!"
+                    },
+                    "400": {
+                        "description": "Representante não encontrado!"
+                    },
+                    "401": {
+                        "description": "Não Autorizado!"
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Representante"],
+                "summary": "Deletar Representante por ID",
+                "description": "Deverá ser possível que um <strong>usuário administrador</strong> possa deletar um Representante com base no ID fornecido.",
+                "security": [{ "bearerAuth": [] }],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do Representante para Apagar",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Representante excluido!"
+                    },
+                    "400": {
+                        "description": "Representante não encontrado!"
+                    },
+                    "401": {
+                        "description": "Não Autorizado!"
+                    }
+                }
+            }
+        },
+        "/recebimentoencomenda/": {
+            "post": {
+                "tags": ["Recebimento de Encomenda"],
+                "summary": "Cadastramento de Recebimento de Encomendas",
+                "description": "O recebimento de encomendas acontece na recepção do ITBC. Um <strong>usuário</strong> da recepção deverá identificar se existe um Cliente ativo para poder receber a encomenda recém chegada. Após a verificação e constatação de cadastro ativo, o usuário terminará o recebimento e o representante cadastrado no Cliente, receberá uma notificação via Whatsapp e E-mail.",
+                "security": [{ "bearerAuth": [] }],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                "obsEncomenda": "Encomenda um pouco avariada nas extremidades",
+                                "obsRecebEncomenda": "Entregue pelos Correios",
+                                "numEndFiscal": 44,
+                                "idRecepcao": 2
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Recebimento de Encomenda cadastrado!"
+                    },
+                    "400": {
+                        "description": "Requisição Inválida!"
+                    },
+                    "401": {
+                        "description": "Não Autorizado!"
+                    }
+                }
+            },
+            "get": {
+                "tags": ["Recebimento de Encomenda"],
+                "summary": "Listagem dos Recebimentos de Encomendas",
+                "description": "Deverá ser possível que um <strong>usuário</strong> possa listar todos os Recebimentos de Encomendas que estão cadastrados, na base de dados do sistema.",
+                "security": [{ "bearerAuth": [] }],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "401": {
+                        "description": "Não Autorizado!"
+                    }
+                }
+            }
+        },
+        "/recebimentoencomenda/id/{id}": {
+            "get": {
+                "tags": ["Recebimento de Encomenda"],
+                "summary": "Busca de Recebimento de Encomenda por ID",
+                "description": "Deverá ser possível que um <strong>usuário</strong> possa buscar um Recebimento de Encomenda pelo número do ID na base de dados do sistema.",
+                "security": [{ "bearerAuth": [] }],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do Recebimento de Encomenda para busca",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RecebimentoEncomenda"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Recebimendo de Encomenda não encontrado!"
+                    },
+                    "401": {
+                        "description": "Não Autorizado!"
+                    }
+                }
+            }
+        },
+        "/retiradaencomenda/": {
+            "post": {
+                "tags": ["Retirada Encomenda"],
+                "summary": "Cadastramento de Retirada de Encomendas",
+                "description": "A retirada de encomendas acontece na recepção do ITBC. Um <strong>representante</strong> do Cliente PJ deverá identificar se existe um Cliente ativo para poder retirar a encomenda recém chegada. Após a verificação e constatação de cadastro ativo, o representante fará a retirada da encomenda.",
+                "security": [{ "bearerAuth": [] }],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "example": {
+                                "idRetirEncomenda": 14,
+                                "dataHoraRetirEncomenda": "2024-01-09T22:34:54.000Z",
+                                "obsRetirEncomenda": "Entregue pelos Correios",
+                                "idEncomenda": 6,
+                                "idRepresent": 2
+                              
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Retirada de Encomenda cadastrado!"
+                    },
+                    "400": {
+                        "description": "Requisição Inválida!"
+                    },
+                    "401": {
+                        "description": "Não Autorizado!"
+                    }
+                }
+            },
+            "get": {
+                "tags": ["Retirada Encomenda"],
+                "summary": "Listagem dos Retiradas de Encomendas",
+                "description": "Deverá ser possível que um <strong>representante</strong> possa listar todos as Retiradas de Encomendas que estão cadastrados, na base de dados do sistema.",
+                "security": [{ "bearerAuth": [] }],
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "401": {
+                        "description": "Não Autorizado!"
+                    }
+                }
+            }
+        },
+        "/retiradaencomenda/id/{id}": {
+            "get": {
+                "tags": ["Retirada Encomenda"],
+                "summary": "Busca de Retirada de Encomenda por ID",
+                "description": "Deverá ser possível que um <strong>representante</strong> possa buscar um Retirada de Encomenda pelo número do ID na base de dados do sistema.",
+                "security": [{ "bearerAuth": [] }],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID do Retirada de Encomenda para busca",
+                        "required": true,
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/RetiradaEncomenda"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Retirada de Encomenda não encontrado!"
+                    },
+                    "401": {
+                        "description": "Não Autorizado!"
+                    }
+                }
+            }
+        }   
+
+    },
+    "components": {
+        "schemas": {
+            "Usuario": {
+                "type": "object",
+                "properties": {                    
+                    "idUsuario": {
+                        "type": "integer"
+                    },
+                    "statusUsuario": {
+                        "type": "string"
+                    },
+                    "nomeUsuario": {
+                        "type": "string"
+                    },
+                    "funcaoUsuario": {
+                        "type": "string"
+                    },
+                    "emailUsuario": {
+                        "type": "string"
+                    },
+                    "loginUsuario": {
+                        "type": "string"
+                    },
+                    "senhaUsuario": {
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "type": "string"
+                    },
+                    "updatedAt": {
+                        "type": "string"
+                    }
+
+                }
+            },
+            "AutenticacaoUsuario": {
+                "type": "object",
+                "properties": {                    
+                    "token": {
+                        "type": "string"
+                    },
+                    "user": {
+                        "type": "object",
+                        "properties": {
+                            "email": {
+                                "type": "string"
+                            },
+                            "senha": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            },
+            "Cliente": {
+                "type": "object",
+                "properties": {                    
+                    "statusCliente": {
+                        "type": "number"
+                    },
+                    "createdAtCliente": {
+                        "type": "datetime"
+                    },
+                    "updatedAtCliente": {
+                        "type": "datetime"
+                    },
+                    "idCliente": {
+                        "type": "number"
+                    },
+                    "nomeCliente": {
+                        "type": "string"
+                    },
+                    "telefoneCliente": {
+                        "type": "string"
+                    },
+                    "emailCliente": {
+                        "type": "string"
+                    },
+                    "qtdPontosCliente": {
+                        "type": "number"
+                    },
+                    "prazoCliente": {
+                        "type": "date"
+                    },
+                    "enderecoIdEndereco": {
+                        "type": "number"
+                    },
+                    "adminIdAdmin": {
+                        "type": "number"
+                    },
+                    "enderecoFiscalNumEndFiscal": {
+                        "type": "number"
+                    }
+                }
+            },
+            "EnderecoFiscal": {
+                "type": "object",
+                "properties": {                    
+                    "statusEndFiscal": {
+                        "type": "number"
+                    },
+                    "numEndFiscal": {
+                        "type": "number"
+                    },
+                    "createdAtEndFiscal": {
+                        "type": "datetime"
+                    },
+                    "updatedAtEndFiscal": {
+                        "type": "datetime"
+                    }
+                }
+            },
+            "Representante": {
+                "type": "object",
+                "properties": {                    
+                    "statusRepresent": {
+                        "type": "number"
+                    },
+                    "idRepresent": {
+                        "type": "number"
+                    },
+                    "nomeRepresent": {
+                        "type": "string"
+                    },
+                    "emailRepresent": {
+                        "type": "string"
+                    },
+                    "telefoneRepresent": {
+                        "type": "string"
+                    },
+                    "updatedAtRepresent": {
+                        "type": "datetime"
+                    },
+                    "createdAtRepresent": {
+                        "type": "datetime"
+                    },
+                    "idPJuridica": {
+                        "type": "number"
+                    }
+                }
+            },
+            "RecebimentoEncomenda": {
+                "type": "object",
+                "properties": {                    
+                    "dataHoraRecebEncomenda": {
+                        "type": "datetime"
+                    },
+                    "idRecebEncomenda": {
+                        "type": "number"
+                    },
+                    "obsRecebEncomenda": {
+                        "type": "string"
+                    },
+                    "encomendaIdEncomenda": {
+                        "type": "number"
+                    },
+                    "enderecoFiscalNumEndFiscal": {
+                        "type": "number"
+                    },
+                    "idRecepcao": {
+                        "type": "number"
+                    }
+                }
+            },
+            "RetiradaEncomenda": {
+                "type": "object",
+                "properties": {                    
+                    "dataHoraRetirEncomenda": {
+                        "type": "datetime"
+                    },
+                    "idRetirEncomenda": {
+                        "type": "number"
+                    },
+                    "obsRetirEncomenda": {
+                        "type": "string"
+                    },
+                    "idEncomenda": {
+                        "type": "number"
+                    },
+                    "idRepresent": {
+                        "type": "number"
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
+            }
+        }
+    }
+}
