@@ -21,6 +21,7 @@ O **Coworking Mangue Space da Softex** é um dos diversos serviços oferecidos p
 * [Usuários](#usuários)
 * [Tecnologias](#tecnologias)
 * [Funcionalidades](#Funcionalidades)
+* [Endpoints da API](#Endpoints-da-API)
 * [Créditos](#Créditos)
 
 <br>
@@ -128,6 +129,239 @@ A API(Application Programing Interface) de Endereço Fiscal é um módulo do Sis
 ✔️ Listagem dos **retiradas de encomendas**;
 
 ✔️ Busca de uma **retirada de encomenda**;
+
+<br>
+
+## Endpoints da API
+
+### `POST /usuario/autenticacao`
+
+Deverá ser possível que um **usuário** possa se autenticar no sistema.
+
+**Request body:**
+
+```
+{
+  "email": "admin@email.com",
+  "senha": "admin"
+}
+```
+
+**Responses:**
+
+- 200 - Ok
+
+  - Content-Type: application/json
+
+    ```
+    {
+      "token": "string",
+      "user": {
+        "email": "string",
+        "senha": "string"
+      }
+    }
+    ```
+
+- 400 - E-mail ou senha incorretos!
+
+<br>
+
+### `POST /usuario/admin`
+
+Deverá ser possível que um **usuário administrador** possa cadastrar outros usuários administradores.
+
+**Request body:**
+
+```
+{
+  "nomeUsuario": "Marcelo Raposo",
+  "funcaoUsuario": "Desenvolvedor Back-End",
+  "emailUsuario": "marcelo.raposo@email.com",
+  "loginUsuario": "marcelofox",
+  "senhaUsuario": "pass123"
+}
+```
+
+**Responses:**
+
+- 200 -  Usuário Administrador cadastrado!
+
+- 400 -  Usuário já existente!
+- 401 -  Não Autorizado!
+
+<br>
+
+### `POST /usuario/recepcao`
+
+Deverá ser possível que um **usuário administrador** possa cadastrar outros usuários da recepção para recebimento de encomendas.
+
+**Request body:**
+
+```
+{
+  "nomeUsuario": "João da Silva",
+  "funcaoUsuario": "Segurança",
+  "emailUsuario": "joao.silva@email.com",
+  "loginUsuario": "joaosilva",
+  "senhaUsuario": "pass123"
+}
+```
+
+**Responses:**
+
+- 200 -  Usuário Recepção cadastrado!
+
+- 400 -  Usuário já existente!
+- 401 -  Não Autorizado!
+
+<br>
+
+### `GET /usuario/ativos`
+
+Deverá ser possível que um **usuário administrador** possa listar todos os usuários que estão cadastrados e ativos, na base de dados do sistema.
+
+**Responses:**
+
+- 200 - Ok
+
+  - Content-Type: application/json
+
+    ```
+    {
+      "idUsuario": 0,
+      "statusUsuario": "string",
+      "nomeUsuario": "string",
+      "funcaoUsuario": "string",
+      "emailUsuario": "string",
+      "loginUsuario": "string",
+      "senhaUsuario": "string",
+      "createdAt": "string",
+      "updatedAt": "string"
+    }
+    ```
+
+- 401 -  Não Autorizado!
+
+<br>
+
+### `GET /usuario/email/{email}`
+
+Deverá ser possível que um **usuário administrador** possa buscar um usuário que está cadastrado, na base de dados do sistema.
+
+**Parameters:**
+
+| Name           | Description                 |
+| :------------- | :-------------------------- |
+| email (string) | Email do Usuário para busca |
+
+**Responses:**
+
+- 200 - Ok
+
+  - Content-Type: application/json
+
+    ```
+    {
+      "idUsuario": 0,
+      "statusUsuario": "string",
+      "nomeUsuario": "string",
+      "funcaoUsuario": "string",
+      "emailUsuario": "string",
+      "loginUsuario": "string",
+      "senhaUsuario": "string",
+      "createdAt": "string",
+      "updatedAt": "string"
+    }
+    ```
+
+- 400 - Usuário não encontrado!
+- 401 -  Não Autorizado!
+
+<br>
+
+### `PATCH /usuario/ativar/{id}`
+
+Deverá ser possível que um **usuário administrador** possa ativar um usuário.
+
+**Parameters:**
+
+| Name        | Description                 |
+| :---------- | :-------------------------- |
+| id (number) | Id do Usuário para ativação |
+
+**Responses:**
+
+- 200 - Usuário ativado!
+
+- 400 - Usuário não encontrado! || Usuário já está ativo!
+- 401 -  Não Autorizado!
+
+<br>
+
+### `PATCH /usuario/inativar/{id}`
+
+Deverá ser possível que um **usuário administrador** possa inativar um usuário.
+
+**Parameters:**
+
+| Name        | Description                   |
+| :---------- | :---------------------------- |
+| id (number) | Id do Usuário para inativação |
+
+**Responses:**
+
+- 200 - Usuário inativado!
+
+- 400 - Usuário não encontrado! || Usuário já está inativo!
+- 401 -  Não Autorizado!
+
+<br>
+
+### `PUT /usuario/{id}`
+
+Deverá ser possível que um **usuário** possa modificar/atualizar seus dados.
+
+**Parameters:**
+
+| Name        | Description                   |
+| :---------- | :---------------------------- |
+| id (number) | Id do Usuário para inativação |
+
+**Request body:**
+
+```
+{
+  "nomeUsuario": "Charlie Brownn",
+  "senhaUsuario": "passworddeff"
+}
+```
+
+**Responses:**
+
+- 200 - Ok!
+
+- 400 - Usuário não encontrado!
+- 401 -  Não Autorizado!
+
+<br>
+
+### `DELETE /usuario/{id}`
+
+Deverá ser possível que um **usuário administrador** possa deletar um usuário.
+
+**Parameters:**
+
+| Name        | Description                |
+| :---------- | :------------------------- |
+| id (number) | Id do Usuário para deleção |
+
+**Responses:**
+
+- 200 - Usuário inativado!
+
+- 400 - Usuário não encontrado!
+- 401 -  Não Autorizado!
 
 <br>
 
