@@ -20,7 +20,8 @@ O **Coworking Mangue Space da Softex** é um dos diversos serviços oferecidos p
 * [Demandas da Cliente](#Demandas-da-Cliente)
 * [Usuários](#usuários)
 * [Tecnologias](#tecnologias)
-* [Badges](#badges)
+* [Funcionalidades](#Funcionalidades)
+* [Créditos](#Créditos)
 
 <br>
 
@@ -49,6 +50,8 @@ A API(Application Programing Interface) de Endereço Fiscal é um módulo do Sis
 - Adminstração do Mangue Space
 - Recepção da Softex
 
+<br>
+
 ## Tecnologias
 
 1. Linguagem: JavaScript;
@@ -68,10 +71,66 @@ A API(Application Programing Interface) de Endereço Fiscal é um módulo do Sis
 
 <br>
 
+## Funcionalidades
 
+✔️ Autenticação de **usuário**;
+
+✔️ Cadastramento de **usuários**:
+
+- Administrador;
+- Recepção.
+
+✔️ Ativação e Inativação de **usuários**;
+
+✔️ Listagem de **usuários** ativos e inativos;
+
+✔️ Busca de **usuários**;
+
+✔️ Atualização de informações do **usuário**;
+
+✔️ Cadastramento de **clientes**:
+
+- Pessoa Física;
+- Pessoa Jurídica.
+
+✔️ Ativação e Inativação de **clientes**;
+
+✔️ Listagem de **clientes** ativos, inativos, cpf, cnpj;
+
+✔️ Busca de **clientes**;
+
+✔️ Atualização de informações do **cliente**;
+
+✔️ Ativação e Inativação de endereços fiscais;
+
+✔️ Busca de **endereço fiscal**;
+
+✔️ Cadastramento de **representantes** de clientes CNPJ:
+
+✔️ Ativação e Inativação de **representantes**;
+
+✔️ Listagem de **representantes** ativos e inativos;
+
+✔️ Busca de **representante**;
+
+✔️ Atualização de informações do **representante**;
+
+✔️ Deleção de **representante**;
+
+✔️ Cadastramento de **recebimento de encomendas**;
+
+✔️ Listagem dos **recebimentos de encomendas**;
+
+✔️ Busca de um **recebimento de encomenda**;
+
+✔️ Cadastramento de **retirada de encomendas**;
+
+✔️ Listagem dos **retiradas de encomendas**;
+
+✔️ Busca de uma **retirada de encomenda**;
+
+<br>
 
 ## Créditos
-
-Créditos: template README.md disponibilizado pela [Alura](#https://www.alura.com.br/artigos/escrever-bom-readme#conclus%C3%A3o).
 
 Link do repositório do projeto: [coworking_softex](https://github.com/ijbs-dev/coworking_softex)
