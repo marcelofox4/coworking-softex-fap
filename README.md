@@ -1,29 +1,48 @@
- O **Coworking Mangue Space da Softex** é um dos diversos serviços oferecidos pela SOFTEX Recife para seus clientes, sejam eles empresas ou não. Os clientes têm a possibilidade de utilizar um serviço denominado Endereço Fiscal, através do qual as empresas recebem um número para envio de correspondências na recepção da Softex. Assim, nossa equipe ficou responsável pelo módulo de gestão de cadastramento e gerenciamento do Endereço Fiscal do Mangue Space.
+# Projeto Integrador - Formação Acelerada em Programação (FAP)
+
+O projeto integrador é uma metodologia de execução do FAP. Consiste ele na identificação de desafios a
+serem postos pelas empresas parceiras. Cada desafio será um projeto de desenvolvimento de software
+executado por uma equipe de aluno(a)s do programa FAP. Esse processo consiste no cerne do desenvolvimento de todo o treinamento visando a aprendizagem baseado em problemas reais.
+
+## Escopo do projeto
+
+O **Coworking Mangue Space da Softex** é um dos diversos serviços oferecidos pela SOFTEX Recife para seus clientes. Quando os clientes contratam o serviço de coworking, têm a possibilidade de ter um Endereço Fiscal, através do qual as empresas podem registrar-se e receberem correspondências na recepção do Empresarial ITBC. Assim, nossa equipe ficou responsável pelo módulo de cadastramento e gestão dos Clientes e dos Endereços Fiscais.
 
 ### Status do Projeto
 
- 
  ![Projeto Em Desenvolvimento](http://img.shields.io/static/v1?label=STATUS&message=EM%20DESENVOLVIMENTO&color=GREEN&style=for-the-badge)
 
+<br>
 
-# ÍNDICE
+
+## Índice
 * [Detalhamento do Projeto](#Detalhamento-do-Projeto)
 * [Demandas da Cliente](#Demandas-da-Cliente)
 * [Usuários](#usuários)
 * [Tecnologias](#tecnologias)
 * [Badges](#badges)
 
-### Detalhamento do Projeto: 
+<br>
 
-O projeto ainda foi subdividido em 3 categorias: 
+## Detalhamento do Projeto: 
 
-1. Um time de Back-End para o módulo de gestão de endereços fiscais e cadastramento de clientes.
-2. Outro time de Back-End para p o módulo de gestão do uso das salas de vídeo e de reunião no Mangue Space da Softex.
+O projeto ainda foi subdividido em 3 grupos: 
+
+1. **Um time de Back-End para o módulo de gestão de endereços fiscais e cadastramento de clientes.**
+2. Outro time de Back-End para o módulo de gestão do uso das salas de reunião no Mangue Space da Softex.
 3. Um único time de Front-End para criação de todas as páginas necessárias para o projeto.
+
+<br>
 
 ## Demandas da Cliente
 
-Criar um sistema de gestão de Cadastramento de Clientes para o **Mangue Space**. O sistema precisa ser capaz de cadastrar e gerenciar novos clientes, precisa ser acessível apenas pela administração e pela recepção da Softex. As empresas ativas podem receber encomendas na recepção. Por conta disso, o sistema precisa notificar automaticamente os clientes por email e WhatsApp.
+A gestão de endereços fiscais e cadastramento de clientes, atualmente, é feita via planilha de Excel. Para o recebimento de encomendas na recepção do Empresarial ITBC, é impressa uma planilha com as empresas ativas e aptas a receber encomendas, então a recepção consulta manualmente cada uma delas quando necessário. Porém, como não é possível atualizar de forma ágil essa versão em papel, o serviço é afetado e a gestora do Coworking, é frequentemente consultada para verificar se a empresa está com o cadastro ativo ou não para que a recepção aceite a encomenda. Após o recebimento da encomenda pela recepção, a mesma e entregue para a gestora do coworking, e ela, manualmente, notifica os clientes, via whatsapp, quanto a retirada das encomendas no próprio coworking. O sistema deverá servir tanto para a gestora quanto para a recepção, não sendo necessário qualquer funcionalidade para as empresas.
+
+<br>
+
+A API(Application Programing Interface) de Endereço Fiscal é um módulo do Sistema de Gerenciamento do Coworking Mangue Space, esse módulo será responsável pelo cadastramento dos clientes no sistema, manipulação e atualização dos cadastros, ativar e desativar cadastros de clientes e exibir a listagem dos clientes com cadastro ativo aptos para recebimento de encomendas e correspondências na recepção do prédio ITBC. No caso de recebimento da encomenda pela recepção, será adicionado a informação de horário e data do recebimento, a fim de deixar registrado para consulta da gestora do coworking. Assim que o recebimento for confirmado, o representante da empresa será notificado automaticamente via WhatsApp e por email.
+
+<br>
 
 ## Usuários
 
@@ -47,26 +66,12 @@ Criar um sistema de gestão de Cadastramento de Clientes para o **Mangue Space**
 7. Documentação: Swagger;
 8. Versionamento: GitHub;
 
-### Badges
+<br>
 
-<p align="left">  <a href="https://nodejs.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs" width="40" height="40"/> </a> <a href="https://expressjs.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original-wordmark.svg" alt="express" width="40" height="40"/> </a> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/>  <a href="https://www.typescriptlang.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" alt="typescript" width="40" height="40"/> </a>  </a> <a href="https://www.mysql.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original-wordmark.svg" alt="mysql" width="40" height="40"/> </a> 
-<a href="https://www.twilio.com" arget="_blank" rel="noreferrer"> <img src="https://www.twilio.com/docs/static/img/twilio-logo.svg" alt="twilio" width="40" height="40"/> </a>
-<a href="https://nodemailer.com" > <img src="https://nodemailer.com/nm_logo_200x136.png" alt="nodemailer" width="40" height="40"/> </a>
-
-<a href="https://git-scm.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="git" width="40" height="40"/> </a>
-</p>
-
-
-## Autores
-
-
-[<img loading="lazy" src="https://avatars.githubusercontent.com/u/91142143?v=4" width=115><br><sub>CLaudio Acioli</sub>](https://github.com/cacau21) <br>
-[<img loading="lazy" src="https://avatars.githubusercontent.com/u/114712275?v=4" width=115><br><sub>Ismael Jefte</sub>](https://github.com/ijbs-dev) <br>
-[<img loading="lazy" src="https://avatars.githubusercontent.com/u/93165904?v=4" width=115><br><sub>Marcelo Raposo</sub>](https://github.com/marcelofox4) <br>
-[<img loading="lazy" src="https://avatars.githubusercontent.com/u/109677612?v=4" width=115><br><sub>Richele Praxedes</sub>](https://github.com/richelepraxedes) <br>
-[<img loading="lazy" src="https://avatars.githubusercontent.com/u/65465090?v=4" width=115><br><sub>Walter Andrade</sub>](https://github.com/walterwa) 
 
 
 ## Créditos
 
 Créditos: template README.md disponibilizado pela [Alura](#https://www.alura.com.br/artigos/escrever-bom-readme#conclus%C3%A3o).
+
+Link do repositório do projeto: [coworking_softex](https://github.com/ijbs-dev/coworking_softex)
