@@ -618,7 +618,7 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Id do Usuário para busca",
+                        "description": "Id do Cliente para busca",
                         "required": true,
                         "schema": {
                             "type": "number"

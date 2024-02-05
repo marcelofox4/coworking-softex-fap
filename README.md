@@ -22,6 +22,13 @@ O **Coworking Mangue Space da Softex** é um dos diversos serviços oferecidos p
 * [Tecnologias](#tecnologias)
 * [Funcionalidades](#Funcionalidades)
 * [Endpoints da API](#Endpoints-da-API)
+  * [Usuário](#Usuário)
+  * [Cliente](#Cliente)
+  * [Endereço Fiscal](#Endereço Fiscal)
+  * [Representante](#Representante)
+  * [Recebimento de encomenda](#Recebimento de encomenda)
+  * [Retirada de Encomenda](#Retirada de Encomenda)
+
 * [Créditos](#Créditos)
 
 <br>
@@ -134,7 +141,9 @@ A API(Application Programing Interface) de Endereço Fiscal é um módulo do Sis
 
 ## Endpoints da API
 
-### `POST /usuario/autenticacao`
+### Usuário
+
+#### `POST /usuario/autenticacao`
 
 Deverá ser possível que um **usuário** possa se autenticar no sistema.
 
@@ -167,7 +176,7 @@ Deverá ser possível que um **usuário** possa se autenticar no sistema.
 
 <br>
 
-### `POST /usuario/admin`
+#### `POST /usuario/admin`
 
 Deverá ser possível que um **usuário administrador** possa cadastrar outros usuários administradores.
 
@@ -185,14 +194,14 @@ Deverá ser possível que um **usuário administrador** possa cadastrar outros u
 
 **Responses:**
 
-- 200 -  Usuário Administrador cadastrado!
+- 200 - Usuário Administrador cadastrado!
 
-- 400 -  Usuário já existente!
-- 401 -  Não Autorizado!
+- 400 - Usuário já existente!
+- 401 - Não Autorizado!
 
 <br>
 
-### `POST /usuario/recepcao`
+#### `POST /usuario/recepcao`
 
 Deverá ser possível que um **usuário administrador** possa cadastrar outros usuários da recepção para recebimento de encomendas.
 
@@ -210,14 +219,14 @@ Deverá ser possível que um **usuário administrador** possa cadastrar outros u
 
 **Responses:**
 
-- 200 -  Usuário Recepção cadastrado!
+- 200 - Usuário Recepção cadastrado!
 
-- 400 -  Usuário já existente!
-- 401 -  Não Autorizado!
+- 400 - Usuário já existente!
+- 401 - Não Autorizado!
 
 <br>
 
-### `GET /usuario/ativos`
+#### `GET /usuario/ativos`
 
 Deverá ser possível que um **usuário administrador** possa listar todos os usuários que estão cadastrados e ativos, na base de dados do sistema.
 
@@ -241,11 +250,11 @@ Deverá ser possível que um **usuário administrador** possa listar todos os us
     }
     ```
 
-- 401 -  Não Autorizado!
+- 401 - Não Autorizado!
 
 <br>
 
-### `GET /usuario/email/{email}`
+#### `GET /usuario/email/{email}`
 
 Deverá ser possível que um **usuário administrador** possa buscar um usuário que está cadastrado, na base de dados do sistema.
 
@@ -276,11 +285,11 @@ Deverá ser possível que um **usuário administrador** possa buscar um usuário
     ```
 
 - 400 - Usuário não encontrado!
-- 401 -  Não Autorizado!
+- 401 - Não Autorizado!
 
 <br>
 
-### `PATCH /usuario/ativar/{id}`
+#### `PATCH /usuario/ativar/{id}`
 
 Deverá ser possível que um **usuário administrador** possa ativar um usuário.
 
@@ -295,11 +304,11 @@ Deverá ser possível que um **usuário administrador** possa ativar um usuário
 - 200 - Usuário ativado!
 
 - 400 - Usuário não encontrado! || Usuário já está ativo!
-- 401 -  Não Autorizado!
+- 401 - Não Autorizado!
 
 <br>
 
-### `PATCH /usuario/inativar/{id}`
+#### `PATCH /usuario/inativar/{id}`
 
 Deverá ser possível que um **usuário administrador** possa inativar um usuário.
 
@@ -314,11 +323,11 @@ Deverá ser possível que um **usuário administrador** possa inativar um usuár
 - 200 - Usuário inativado!
 
 - 400 - Usuário não encontrado! || Usuário já está inativo!
-- 401 -  Não Autorizado!
+- 401 - Não Autorizado!
 
 <br>
 
-### `PUT /usuario/{id}`
+#### `PUT /usuario/{id}`
 
 Deverá ser possível que um **usuário** possa modificar/atualizar seus dados.
 
@@ -342,11 +351,11 @@ Deverá ser possível que um **usuário** possa modificar/atualizar seus dados.
 - 200 - Ok!
 
 - 400 - Usuário não encontrado!
-- 401 -  Não Autorizado!
+- 401 - Não Autorizado!
 
 <br>
 
-### `DELETE /usuario/{id}`
+#### `DELETE /usuario/{id}`
 
 Deverá ser possível que um **usuário administrador** possa deletar um usuário.
 
@@ -361,9 +370,662 @@ Deverá ser possível que um **usuário administrador** possa deletar um usuári
 - 200 - Usuário inativado!
 
 - 400 - Usuário não encontrado!
-- 401 -  Não Autorizado!
+- 401 - Não Autorizado!
 
 <br>
+
+### Cliente
+
+#### `POST /cadastroCliente/pessoaFisica`
+
+Deverá ser possível que um **usuário administrador** possa cadastrar um cliente Pessoa Física na base de dados do sistema.
+
+**Request body:**
+
+```
+{
+  "nomeCliente": "João Pedro",
+  "cpf": "00011122244",
+  "telefoneCliente": "4444-8888",
+  "emailCliente": "contato@lojaspedros.com",
+  "qtdPontosCliente": 2,
+  "prazoCliente": "2024-01-14",
+  "valorMensalCliente": "400",
+  "logradouro": "Rua João Pedro",
+  "numero": 255,
+  "bairro": "Bairro do Recife",
+  "uf": "PE",
+  "numEndFiscal": 70,
+  "idUsuario": 1
+}
+```
+
+**Responses:**
+
+- 200 - Cliente cadastrado com sucesso!
+
+- 400 - Requisição Inválida!
+- 401 - Não Autorizado!
+
+<br>
+
+#### `POST /cadastroCliente/pessoaJuridica`
+
+Deverá ser possível que um **usuário administrador** possa cadastrar um cliente Pessoa Jurídica na base de dados do sistema.
+
+**Request body:**
+
+```
+{
+  "nomeCliente": "Walter Wagner",
+  "razaoSocial": "Walter LTDA",
+  "cnpj": "05311244000177",
+  "telefoneCliente": "2222-3333",
+  "emailCliente": "walter.limitada@email.com",
+  "qtdPontosCliente": 2,
+  "prazoCliente": "2024-01-13",
+  "valorMensalCliente": "400",
+  "logradouro": "rua do frevo",
+  "numero": 500,
+  "bairro": "Bairro do Recife",
+  "uf": "PE",
+  "numEndFiscal": 42,
+  "idUsuario": 1,
+  "nomeRepresent": "Richele Praxedes",
+  "emailRepreset": "richele@gmail.com",
+  "telefoneRepresent": "5555-4444"
+}
+```
+
+**Responses:**
+
+- 200 - Cliente cadastrado com sucesso!
+
+- 400 - Requisição Inválida!
+- 401 - Não Autorizado!
+
+<br>
+
+#### `GET /cliente/ativados`
+
+Deverá ser possível que um **usuário** possa listar todos os Clientes que estão cadastrados e ativos na base de dados do sistema.
+
+**Responses:**
+
+- 200 - Ok;
+
+- 401 - Não Autorizado!
+
+<br>
+
+#### `GET /cliente/inativados`
+
+Deverá ser possível que um **usuário administrador** possa listar todos os Clientes que estão cadastrados e inativos, na base de dados do sistema.
+
+**Responses:**
+
+- 200 - Ok;
+
+- 401 - Não Autorizado!
+
+<br>
+
+#### `GET /cadastroCliente/cnpj/{cnpj}`
+
+Deverá ser possível que um **usuário** possa buscar um Cliente pelo número de CNPJ na base de dados do sistema.
+
+**Parameters:**
+
+| Name          | Description                |
+| :------------ | :------------------------- |
+| cnpj (string) | CNPJ do Cliente para busca |
+
+**Responses:**
+
+- 200 - Ok
+
+  - Content-Type: application/json
+
+    ```
+    {
+      "statusCliente": 0,
+      "createdAtCliente": "Unknown Type: datetime",
+      "updatedAtCliente": "Unknown Type: datetime",
+      "idCliente": 0,
+      "nomeCliente": "string",
+      "telefoneCliente": "string",
+      "emailCliente": "string",
+      "qtdPontosCliente": 0,
+      "prazoCliente": "Unknown Type: date",
+      "enderecoIdEndereco": 0,
+      "adminIdAdmin": 0,
+      "enderecoFiscalNumEndFiscal": 0
+    }
+    ```
+
+- 400 - Não existe um Cliente com este CNPJ
+
+- 401 - Não Autorizado!
+
+<br>
+
+#### `GET /cadastroCliente/cpf/{cpf}`
+
+Deverá ser possível que um **usuário** possa buscar um Cliente pelo número de CPF na base de dados do sistema.
+
+**Parameters:**
+
+| Name         | Description               |
+| :----------- | :------------------------ |
+| cpf (string) | CPF do Cliente para busca |
+
+**Responses:**
+
+- 200 - Ok
+
+  - Content-Type: application/json
+
+    ```
+    {
+      "statusCliente": 0,
+      "createdAtCliente": "Unknown Type: datetime",
+      "updatedAtCliente": "Unknown Type: datetime",
+      "idCliente": 0,
+      "nomeCliente": "string",
+      "telefoneCliente": "string",
+      "emailCliente": "string",
+      "qtdPontosCliente": 0,
+      "prazoCliente": "Unknown Type: date",
+      "enderecoIdEndereco": 0,
+      "adminIdAdmin": 0,
+      "enderecoFiscalNumEndFiscal": 0
+    }
+    ```
+
+- 400 - Não existe um Cliente com este CPF
+
+- 401 - Não Autorizado!
+
+<br>
+
+#### `GET /cliente/id/{id}`
+
+Deverá ser possível que um **usuário** possa buscar um Cliente pelo número do ID na base de dados do sistema.
+
+**Parameters:**
+
+| Name        | Description              |
+| :---------- | :----------------------- |
+| id (number) | ID do Cliente para busca |
+
+**Responses:**
+
+- 200 - Ok
+
+  - Content-Type: application/json
+
+    ```
+    {
+      "statusCliente": 0,
+      "createdAtCliente": "Unknown Type: datetime",
+      "updatedAtCliente": "Unknown Type: datetime",
+      "idCliente": 0,
+      "nomeCliente": "string",
+      "telefoneCliente": "string",
+      "emailCliente": "string",
+      "qtdPontosCliente": 0,
+      "prazoCliente": "Unknown Type: date",
+      "enderecoIdEndereco": 0,
+      "adminIdAdmin": 0,
+      "enderecoFiscalNumEndFiscal": 0
+    }
+    ```
+
+- 400 - Cliente não encontrado!
+
+- 401 - Não Autorizado!
+
+<br>
+
+#### `PATCH /cadastroCliente/ativar/{id}`
+
+Deverá ser possível que um **usuário administrador** possa ativar um Cliente que foi inativado. Observações: Quando a ativação do Cliente for efetuada com sucesso, o endereço postal, e os representantes do mesmo, caso seja uma PJ, deverão ser ativados.
+
+**Parameters:**
+
+| Name        | Description                 |
+| :---------- | :-------------------------- |
+| id (number) | Id do Cliente para ativação |
+
+**Responses:**
+
+- 200 - Cadastro de Cliente ativado!
+
+- 400 - Cliente não encontrado! || Cliente já se encontra ativo no sistema!
+- 401 - Não Autorizado!
+
+<br>
+
+#### `PATCH /cadastroCliente/inativar/{id}`
+
+Deverá ser possível que um **usuário administrador** possa inativar um Cliente, isso acontece quando o usuário administrador o faz ou quando acaba o prazo de contrato. A inativação do cliente é um artifício utilizado para impedir que um cliente já cadastrado seja excluído por completo da base de dados, pois ele pode ser ativado novamente a qualquer momento. Observações: Quando a inativação do Cliente for efetuada com sucesso, o endereço postal, e os representantes do mesmo, caso seja uma PJ, deverão ser inativados.
+
+**Parameters:**
+
+| Name        | Description                   |
+| :---------- | :---------------------------- |
+| id (number) | Id do Cliente para inativação |
+
+**Responses:**
+
+- 200 - Cadastro de Cliente ativado!
+
+- 400 - Cliente não encontrado! || Cliente já se encontra inativo no sistema!
+- 401 - Não Autorizado!
+
+<br>
+
+#### `PATCH /cadastroCliente/{id}`
+
+Deverá ser possível que um **usuário administrador** possa modificar/atualizar dados de um Cliente da base de dados do sistema.
+
+**Parameters:**
+
+| Name        | Description              |
+| :---------- | :----------------------- |
+| id (number) | Id do Cliente para busca |
+
+**Request body:**
+
+```
+{
+  "telefoneCliente": "0000-0000",
+  "emailCliente": "atualizado@email.com",
+  "qtdPontosCliente": 1,
+  "prazoCliente": "2024-01-14",
+  "valorMensalCliente": 750,
+  "logradouro": "Rua modificada",
+  "numero": 211,
+  "bairro": "Bairro modificado",
+  "uf": "RJ"
+}
+```
+
+**Responses:**
+
+- 200 - Cadastro de Cliente atualizado!
+
+- 400 -  Cliente não encontrado!
+- 401 - Não Autorizado!
+
+<br>
+
+### Endereço Fiscal
+
+#### `GET /enderecofiscal/ativos`
+
+Deverá ser possível que um **usuário** possa listar todos os Endereços Fiscais que estão cadastrados e ativos na base de dados do sistema.
+
+**Responses:**
+
+- 200 - Ok;
+
+- 401 - Não Autorizado!
+
+<br>
+
+#### `GET /enderecofiscal/inativos`
+
+Deverá ser possível que um **usuário administrador** possa listar todos os Endereços Fiscais que estão cadastrados e inativos na base de dados do sistema.
+
+**Responses:**
+
+- 200 - Ok;
+
+- 401 - Não Autorizado!
+
+<br>
+
+#### `GET /enderecofiscal/{numEndFiscal}`
+
+Deverá ser possível que um **usuário** possa buscar um Endereços Fiscais que está cadastrado na base de dados do sistema.
+
+**Parameters:**
+
+| Name                  | Description                          |
+| :-------------------- | :----------------------------------- |
+| numEndFiscal (number) | Número de Endereço Fiscal para busca |
+
+**Responses:**
+
+- 200 - Ok
+
+  - Content-Type: application/json
+
+    ```
+    {
+      "statusEndFiscal": 0,
+      "numEndFiscal": 0,
+      "createdAtEndFiscal": "Unknown Type: datetime",
+      "updatedAtEndFiscal": "Unknown Type: datetime"
+    }
+    ```
+
+- 400 - Endereço Fiscal não encontrado!
+
+- 401 - Não Autorizado!
+
+<br>
+
+### Representante
+
+#### `POST /representante`
+
+Deverá ser possível um **usuário administrador** fazer o cadastramento de representantes da empresa na base de dados do sistema.
+
+**Request body:**
+
+```
+{
+  "nomeRepresent": "Carlos Pena",
+  "emailRepresent": "carlos.pena@HOTMAIL.com",
+  "telefoneRepresent": "1981-1711",
+  "idPJuridica": 3
+}
+```
+
+**Responses:**
+
+- 200 - Representante Cadastrado!
+
+- 400 - Representante já cadastrado com este E-mail!
+- 401 - Não Autorizado!
+
+<br>
+
+#### `GET /representante/ativos`
+
+Deverá ser possível que um **usuário** possa listar todos os Representantes que estão cadastrados e ativos, na base de dados do sistema.
+
+**Responses:**
+
+- 200 - Ok;
+
+- 401 - Não Autorizado!
+
+<br>
+
+#### `GET /representante/inativos`
+
+Deverá ser possível que um **usuário administrador** possa listar todos os Representantes que estão cadastrados e inativos, na base de dados do sistema.
+
+**Responses:**
+
+- 200 - Ok;
+
+- 401 - Não Autorizado!
+
+<br>
+
+#### `GET /representante/email/{email}`
+
+Deverá ser possível que um **usuário** possa buscar um Representante pelo número do E-mail na base de dados do sistema.
+
+**Parameters:**
+
+| Name           | Description                        |
+| :------------- | :--------------------------------- |
+| email (string) | E-mail do Representante para busca |
+
+**Responses:**
+
+- 200 - Ok
+
+  - Content-Type: application/json
+
+    ```
+    {
+      "statusRepresent": 0,
+      "idRepresent": 0,
+      "nomeRepresent": "string",
+      "emailRepresent": "string",
+      "telefoneRepresent": "string",
+      "updatedAtRepresent": "Unknown Type: datetime",
+      "createdAtRepresent": "Unknown Type: datetime",
+      "idPJuridica": 0
+    }
+    ```
+
+- 400 - Representante não encontrado!
+
+- 401 - Não Autorizado!
+
+<br>
+
+#### `PATCH /representante/ativar/{id}`
+
+Deverá ser possível que um **usuário administrador** possa ativar um Representante que foi inativado.
+
+**Parameters:**
+
+| Name        | Description                       |
+| :---------- | :-------------------------------- |
+| id (number) | Id do Representante para ativação |
+
+**Responses:**
+
+- 200 - Representante ativado!
+
+- 400 - Representante não encontrado! || Representante já está ativo!
+- 401 - Não Autorizado!
+
+<br>
+
+#### `PATCH /representante/inativar/{id}`
+
+Deverá ser possível que um **usuário administrador** possa inativar um Representante. A inativação do representante é um artifício utilizado para impedir que um Representante já cadastrado seja excluído por completo da base de dados, pois ele pode ser ativado novamente a qualquer momento.
+
+**Parameters:**
+
+| Name        | Description                         |
+| :---------- | :---------------------------------- |
+| id (number) | Id do Representante para inativação |
+
+**Responses:**
+
+- 200 - Representante inativado!
+
+- 400 - Representante não encontrado! || Representante já está Inativo!
+- 401 - Não Autorizado!
+
+<br>
+
+#### `PATCH /representante/{id}`
+
+Deverá ser possível que um **usuário administrador** possa modificar/atualizar dados de um Representante da base de dados do sistema.
+
+**Parameters:**
+
+| Name        | Description                    |
+| :---------- | :----------------------------- |
+| id (number) | Id do Representante para busca |
+
+**Request body:**
+
+```
+{
+  "emailRepresent": "atualizado@email.com",
+  "telefoneRepresent": "0000-0000"
+}
+```
+
+**Responses:**
+
+- 200 - Representante atualizado!
+
+- 400 - Representante não encontrado!
+- 401 - Não Autorizado!
+
+<br>
+
+#### `DELETE /usuario/{id}`
+
+Deverá ser possível que um **usuário administrador** possa deletar um Representante com base no ID fornecido.
+
+**Parameters:**
+
+| Name        | Description                     |
+| :---------- | :------------------------------ |
+| id (number) | ID do Representante para Apagar |
+
+**Responses:**
+
+- 200 - Representante excluido!
+
+- 400 - Representante não encontrado!
+- 401 - Não Autorizado!
+
+<br>
+
+### Recebimento de encomenda
+
+#### `POST /recebimentoencomenda/`
+
+O recebimento de encomendas acontece na recepção do ITBC. Um **usuário** da recepção deverá identificar se existe um Cliente ativo para poder receber a encomenda recém chegada. Após a verificação e constatação de cadastro ativo, o usuário terminará o recebimento e o representante cadastrado no Cliente, receberá uma notificação via Whatsapp e E-mail.
+
+**Request body:**
+
+```
+{
+  "obsEncomenda": "Encomenda um pouco avariada nas extremidades",
+  "obsRecebEncomenda": "Entregue pelos Correios",
+  "numEndFiscal": 44,
+  "idRecepcao": 2
+}
+```
+
+**Responses:**
+
+- 200 - Recebimento de Encomenda cadastrado!
+
+- 400 - Requisição Inválida!
+- 401 - Não Autorizado!
+
+<br>
+
+#### `GET /recebimentoencomenda/`
+
+Deverá ser possível que um **usuário** possa listar todos os Recebimentos de Encomendas que estão cadastrados, na base de dados do sistema.
+
+**Responses:**
+
+- 200 - Ok;
+
+- 401 - Não Autorizado!
+
+<br>
+
+#### `GET /recebimentoencomenda/id`
+
+Deverá ser possível que um **usuário** possa buscar um Recebimento de Encomenda pelo número do ID na base de dados do sistema.
+
+**Parameters:**
+
+| Name        | Description                               |
+| :---------- | :---------------------------------------- |
+| id (number) | ID do Recebimento de Encomenda para busca |
+
+**Responses:**
+
+- 200 - Ok
+
+  - Content-Type: application/json
+
+    ```
+    {
+      "dataHoraRecebEncomenda": "Unknown Type: datetime",
+      "idRecebEncomenda": 0,
+      "obsRecebEncomenda": "string",
+      "encomendaIdEncomenda": 0,
+      "enderecoFiscalNumEndFiscal": 0,
+      "idRecepcao": 0
+    }
+    ```
+
+- 400 -  Recebimendo de Encomenda não encontrado!
+
+- 401 - Não Autorizado!
+
+<br>
+
+### Retirada de Encomenda
+
+#### `POST /retiradaencomenda/`
+
+A retirada de encomendas acontece na recepção do ITBC. Um **representante** do Cliente PJ deverá identificar se existe um Cliente ativo para poder retirar a encomenda recém chegada. Após a verificação e constatação de cadastro ativo, o representante fará a retirada da encomenda.
+
+**Request body:**
+
+```
+{
+  "idRetirEncomenda": 14,
+  "dataHoraRetirEncomenda": "2024-01-09T22:34:54.000Z",
+  "obsRetirEncomenda": "Entregue pelos Correios",
+  "idEncomenda": 6,
+  "idRepresent": 2
+}
+```
+
+**Responses:**
+
+- 200 - Retirada de Encomenda cadastrado!
+
+- 400 - Requisição Inválida!
+- 401 - Não Autorizado!
+
+<br>
+
+#### `GET /retiradaencomenda/`
+
+Deverá ser possível que um **representante** possa listar todos as Retiradas de Encomendas que estão cadastrados, na base de dados do sistema.
+
+**Responses:**
+
+- 200 - Ok;
+
+- 401 - Não Autorizado!
+
+<br>
+
+#### `GET /retiradaencomenda/id`
+
+Deverá ser possível que um **representante** possa buscar uma Retirada de Encomenda pelo número do ID na base de dados do sistema.
+
+**Parameters:**
+
+| Name        | Description                            |
+| :---------- | :------------------------------------- |
+| id (number) | ID do Retirada de Encomenda para busca |
+
+**Responses:**
+
+- 200 - Ok
+
+  - Content-Type: application/json
+
+    ```
+    {
+      "dataHoraRetirEncomenda": "Unknown Type: datetime",
+      "idRetirEncomenda": 0,
+      "obsRetirEncomenda": "string",
+      "idEncomenda": 0,
+      "idRepresent": 0
+    }
+    ```
+
+- 400 -  Retirada de Encomenda não encontrado!
+
+- 401 - Não Autorizado!
 
 ## Créditos
 
