@@ -24,10 +24,10 @@ O **Coworking Mangue Space da Softex** é um dos diversos serviços oferecidos p
 * [Endpoints da API](#Endpoints-da-API)
   * [Usuário](#Usuário)
   * [Cliente](#Cliente)
-  * [Endereço Fiscal](#Endereço Fiscal)
+  * [Endereço Fiscal](#Endereço-Fiscal)
   * [Representante](#Representante)
-  * [Recebimento de encomenda](#Recebimento de encomenda)
-  * [Retirada de Encomenda](#Retirada de Encomenda)
+  * [Recebimento de encomenda](#Recebimento-de-encomenda)
+  * [Retirada de Encomenda](#Retirada-de-Encomenda)
 
 * [Créditos](#Créditos)
 
